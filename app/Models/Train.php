@@ -9,6 +9,11 @@ class Train extends Model
 {
     use HasFactory;
 
+    public function editor()
+    {
+        return $this->belongsTo(User::class, 'editor_id');
+    }
+
     public function getPathAttribute()
     {
         return $this->path();

@@ -36,15 +36,9 @@ class TrainController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Train  $train
-     * @return \Illuminate\Http\Response
-     */
     public function show(Train $train)
     {
-        //
+        return view('trains.show', compact('train'));
     }
 
     /**

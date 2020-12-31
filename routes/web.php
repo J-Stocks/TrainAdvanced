@@ -13,4 +13,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return redirect(route('trains.index'));
     });
     Route::get('/trains', [TrainController::class, 'index'])->name('trains.index');
+    Route::get('/trains/{train}', [TrainController::class, 'show']);
 });
