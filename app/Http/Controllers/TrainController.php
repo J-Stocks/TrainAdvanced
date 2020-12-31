@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Train;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TrainController extends Controller
 {
+    private const RULES = [
+        'make' => 'required|min:1|max:255',
+        'model' => 'required|min:1|max:255',
+        'production_start' => 'required|date|before_or_equal:production_end',
+        'production_end' => 'required|date|after_or_equal:production_start',
+        'description' => 'max:3000'
+    ];
+
     private const TRAINS_PER_INDEX = 24;
 
     public function index()
@@ -15,25 +24,17 @@ class TrainController extends Controller
         return view('trains.index', compact('trains'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('trains.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $attributes = $request->validate(self::RULES);
+        $attributes['editor_id'] = Auth::user()->id;
+        $train = Train::create($attributes);
+        return redirect(url($train->path));
     }
 
     public function show(Train $train)

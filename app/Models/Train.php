@@ -9,6 +9,15 @@ class Train extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'make',
+        'model',
+        'production_start',
+        'production_end',
+        'description',
+        'editor_id',
+    ];
+
     public function editor()
     {
         return $this->belongsTo(User::class, 'editor_id');
