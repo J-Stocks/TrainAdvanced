@@ -42,27 +42,17 @@ class TrainController extends Controller
         return view('trains.show', compact('train'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Train  $train
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Train $train)
     {
-        //
+        return view('trains.edit', compact('train'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Train  $train
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Train $train)
     {
-        //
+        $attributes = $request->validate(self::RULES);
+        $attributes['editor_id'] = Auth::user()->id;
+        $train->update($attributes);
+        return redirect(url($train->path));
     }
 
     /**

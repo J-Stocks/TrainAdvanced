@@ -19,6 +19,11 @@
                 <p>
                     Last edited by {{ $train->editor->name ?? 'defunct user' }} at {{ $train->updated_at }}.
                 </p>
+                <div class="flex">
+                    <a href="{{ $train->path('edit') }}" class="w-1/2 mr-1 select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base text-center leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:py-4">
+                        Edit
+                    </a>
+                </div>
             </div>
         </div>
     </div>

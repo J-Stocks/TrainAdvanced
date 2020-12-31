@@ -28,6 +28,16 @@ class Train extends Model
         return $this->path();
     }
 
+    public function getMakeModelAttribute()
+    {
+        return $this->makeModel();
+    }
+
+    public function makeModel()
+    {
+        return $this->make . ", " . $this->model;
+    }
+
     public function path($append = "")
     {
         return "/trains/" . $this->id . "/" . $append;
