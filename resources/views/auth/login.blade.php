@@ -37,6 +37,10 @@
                     Login via GitHub
                 </a>
 
+                <a href="{{ route('register') }}" class="underline text-sm text-gray-600 hover:text-gray-900 mr-4">
+                    Register
+                </a>
+
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
