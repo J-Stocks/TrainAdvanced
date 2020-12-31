@@ -13,7 +13,7 @@ class TrainController extends Controller
         'model' => 'required|min:1|max:255',
         'production_start' => 'required|date|before_or_equal:production_end',
         'production_end' => 'required|date|after_or_equal:production_start',
-        'description' => 'max:3000'
+        'description' => 'max:3000',
     ];
 
     private const TRAINS_PER_INDEX = 24;
@@ -55,14 +55,9 @@ class TrainController extends Controller
         return redirect(url($train->path));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Train  $train
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Train $train)
     {
-        //
+        $train->delete();
+        return redirect(url('/trains'));
     }
 }

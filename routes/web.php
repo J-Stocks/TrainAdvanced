@@ -18,4 +18,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/trains/{train}', [TrainController::class, 'show']);
     Route::get('/trains/{train}/edit', [TrainController::class, 'edit']);
     Route::patch('/trains/{train}/', [TrainController::class, 'update']);
+    Route::delete('/trains/{train}/', [TrainController::class, 'destroy']);
 });
