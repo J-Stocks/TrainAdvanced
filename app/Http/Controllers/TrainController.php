@@ -7,14 +7,12 @@ use Illuminate\Http\Request;
 
 class TrainController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private const TRAINS_PER_INDEX = 24;
+
     public function index()
     {
-        //
+        $trains = Train::orderBy('make')->orderBy('model')->paginate(self::TRAINS_PER_INDEX);
+        return view('trains.index', compact('trains'));
     }
 
     /**

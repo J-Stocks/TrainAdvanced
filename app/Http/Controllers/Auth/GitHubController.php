@@ -21,7 +21,7 @@ class GitHubController extends Controller
     {
         $user = $this->findOrCreateUser(Socialite::driver('github')->user());
         Auth::login($user);
-        return redirect(route('dashboard'));
+        return redirect(route('trains.index'));
     }
 
     public function findOrCreateUser($githubUser)
