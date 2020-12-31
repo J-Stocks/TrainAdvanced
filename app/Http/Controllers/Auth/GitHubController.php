@@ -29,12 +29,17 @@ class GitHubController extends Controller
         try {
             $user = User::where('github_id', $githubUser->getId())->firstOrFail();
         } catch (ModelNotFoundException $exception) {
-            $user = User::create([
-                'name' => $githubUser->getNickname(),
-                'email' => $githubUser->getEmail(),
-                'password' => Hash::make(Str::random(32)),
-                'github_id' => $githubUser->getId(),
-            ]);
+            try {
+                $user = User::where('email', $githubUser->getEmail())->firstOrFail();
+                $user->update(['github_id' => $githubUser->getId()]);
+            } catch (ModelNotFoundException $exception) {
+                $user = User::create([
+                    'name' => $githubUser->getNickname(),
+                    'email' => $githubUser->getEmail(),
+                    'password' => Hash::make(Str::random(32)),
+                    'github_id' => $githubUser->getId(),
+                ]);
+            }
         }
         return $user;
     }
