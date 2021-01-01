@@ -20,3 +20,4 @@ This app was built using the following tools:
 - [Laravel 8](https://laravel.com/)
 - [Laravel Jetstream](https://jetstream.laravel.com/1.x/introduction.html)
 - [Laravel Socialite](https://laravel.com/docs/8.x/socialite)
+- [Gravatar for Laravel](https://github.com/creativeorange/gravatar)

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Creativeorange\Gravatar\Facades\Gravatar;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -39,4 +40,13 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    protected function defaultProfilePhotoUrl()
+    {
+        if (Gravatar::exists($this->email)) {
+            return Gravatar::get($this->email);
+        } else {
+            return 'https://ui-avatars.com/api/?name='.urlencode($this->name).'&color=7F9CF5&background=EBF4FF';
+        }
+    }
 }
