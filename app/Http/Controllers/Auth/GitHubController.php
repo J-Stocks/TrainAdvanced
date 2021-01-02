@@ -39,6 +39,7 @@ class GitHubController extends Controller
                     'password' => Hash::make(Str::random(32)),
                     'github_id' => $githubUser->getId(),
                 ]);
+                $user->markEmailAsVerified();
             }
         }
         return $user;

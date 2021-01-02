@@ -9,6 +9,7 @@ To set up and run TrainADVANCED do as follows:
 - Set up a database, [MariaDB](https://mariadb.org/) via [XAMPP](https://www.apachefriends.org/index.html) is recommended.
 - Add the connection details for the database to the .env file, all the properties prefixed with "DB_" are required.
 - Set up OAuth on [GitHub](https://docs.github.com/en/free-pro-team@latest/developers/apps/creating-an-oauth-app) then add the client id and secret to the .env file, all the properties prefixed with "GITHUB_" are required.
+- Add your mail credentials to the .env file, [mailtrap](https://mailtrap.io/) is recommended for testing, all properties prefixed with "MAIL_" are required.
 - Link your local storage to the app storage using `php artisan storage:link` and ensure that the "APP_URL" property in the .env file is either left blank if running from localhost.
 - Seed the database: `php artisan migrate:fresh --seed`
 - Install and build the [npm](https://www.npmjs.com/get-npm) packages: `npm install && npm run dev`
