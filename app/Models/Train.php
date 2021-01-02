@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Train extends Model
 {
@@ -16,6 +17,7 @@ class Train extends Model
         'production_end',
         'description',
         'editor_id',
+        'image_url',
     ];
 
     public function editor()
@@ -31,6 +33,11 @@ class Train extends Model
     public function getMakeModelAttribute()
     {
         return $this->makeModel();
+    }
+
+    public function getPublicImageUrlAttribute()
+    {
+        return Storage::url($this->image_url);
     }
 
     public function makeModel()

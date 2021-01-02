@@ -7,7 +7,11 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-2">
-                <form method="post" action="{{ route('trains.store') }}" class="inline-grid grid-cols-3 gap-2">
+                <form
+                    method="post"
+                    action="{{ route('trains.store') }}" class="inline-grid grid-cols-3 gap-2"
+                    enctype="multipart/form-data"
+                >
                     @csrf
                     <div class="flex flex-col justify-center">
                         <label for="make">Make</label>
@@ -84,6 +88,22 @@
                     />
                     <div>
                         @error ('description')
+                            <p>
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <label for="image">Image</label>
+                    </div>
+                    <input
+                        class="border border-gray-700 rounded px-1 py-1 @error ('image') border border-red-500 @enderror"
+                        type="file"
+                        name="image"
+                        id="image"
+                    />
+                    <div>
+                        @error ('image')
                             <p>
                                 {{ $message }}
                             </p>

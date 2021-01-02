@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Train;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class TrainController extends Controller
 {
@@ -14,6 +15,7 @@ class TrainController extends Controller
         'production_start' => 'required|date|before_or_equal:production_end',
         'production_end' => 'required|date|after_or_equal:production_start',
         'description' => 'max:3000',
+        'image' => 'nullable|image|max:2048',
     ];
 
     private const TRAINS_PER_INDEX = 24;
@@ -33,6 +35,11 @@ class TrainController extends Controller
     {
         $attributes = $request->validate(self::RULES);
         $attributes['editor_id'] = Auth::user()->id;
+        if ($request['image']) {
+            $attributes['image_url'] = $request
+                ->file('image')
+                ->storePublicly('train-images', ['disk' => 'public']);
+        }
         $train = Train::create($attributes);
         return redirect(url($train->path));
     }
@@ -51,12 +58,19 @@ class TrainController extends Controller
     {
         $attributes = $request->validate(self::RULES);
         $attributes['editor_id'] = Auth::user()->id;
+        if ($request['image']) {
+            Storage::disk('public')->delete($train->image_url);
+            $attributes['image_url'] = $request
+                ->file('image')
+                ->storePublicly('train-images', ['disk' => 'public']);
+        }
         $train->update($attributes);
         return redirect(url($train->path));
     }
 
     public function destroy(Train $train)
     {
+        Storage::disk('public')->delete($train->image_url);
         $train->delete();
         return redirect(url('/trains'));
     }
