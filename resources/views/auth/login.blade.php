@@ -33,14 +33,6 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a href="{{ route('github.redirect') }}" class="underline text-sm text-gray-600 hover:text-gray-900 mr-4">
-                    Login via GitHub
-                </a>
-
-                <a href="{{ route('register') }}" class="underline text-sm text-gray-600 hover:text-gray-900 mr-4">
-                    Register
-                </a>
-
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
@@ -52,5 +44,19 @@
                 </x-jet-button>
             </div>
         </form>
+        <div class="flex justify-between mt-4">
+            <a
+                href="{{ route('github.redirect') }}"
+                class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"
+            >
+                Login via GitHub
+            </a>
+            <a
+                href="{{ route('register') }}"
+                class="inline-flex items-center px-4 py-2 ml-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"
+            >
+                Register
+            </a>
+        </div>
     </x-jet-authentication-card>
 </x-guest-layout>
